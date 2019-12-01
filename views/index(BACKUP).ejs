@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="Proxy">
+
+<head>
+    <base href="/">
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>YouTube Video Player</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+    <!-- Angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
+    <script src="/static/js/app.js"></script>
+
+    <style>
+        html,
+        body,
+        .main-container {
+            height: 100%;
+        }
+
+        body {
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body ng-controller="ProxyController">
+    <div class="container main-container valign-wrapper" ng-show="loading">
+        <div class="row valign" style="width: 100%">
+            <div class="col s12" ng-show="loading">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-hide="loading">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content red-text">
+                        <span class="card-title">YouTube Direct Link</span>
+                        <form ng-submit="view()">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input ng-model="ytLink" id="ytLink" type="text" class="validate" required>
+                                    <label for="ytLink">Video ID</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button type="submit" class="waves-effect waves-light btn red">Go</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content red-text">
+                        <span class="card-title">YouTube Search</span>
+                        <form ng-submit="searchView()">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input ng-model="ytSearch" id="ytSearch" type="text" class="validate" required>
+                                    <label for="ytSearch">Search Query</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button type="submit" class="waves-effect waves-light btn red">Go</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content red-text">
+                        <span class="card-title">History</span>
+                        <div class="row">
+                            <div class="col s12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Video ID</th>
+                                            <th>Video Title</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="historyItem in history">
+                                            <td>{{historyItem.id}}</td>
+                                            <td>{{historyItem.title}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="waves-effect waves-light btn red" ng-click="clear()">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
